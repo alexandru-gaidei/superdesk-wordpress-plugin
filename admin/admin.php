@@ -368,7 +368,7 @@ function superdesk_admin() {
                           <small>SD field with template name in WP (ex. extra.wp-tempalte: Full-Width)</small>
                           <br />
                           <small>Available WP tempaltes: <?php 
-                            $templates = wp_get_theme()->get_page_templates();
+                            $templates = wp_get_theme()->get_page_templates(null, 'post');
                             echo count($templates) > 0 ? implode(', ', $templates)  : 'none'
                           ?></small>
                           <br />

@@ -172,7 +172,7 @@ if ($obj['type'] == 'text') {
         }
       }
 
-      $templates = wp_get_theme()->get_page_templates();
+      $templates = wp_get_theme()->get_page_templates(null, 'post');
 
       if(!empty($template_name) && count($templates) > 0) {
         $template = array_search($template_name, $templates);
