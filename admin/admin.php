@@ -55,6 +55,8 @@ function superdesk_admin() {
         'convert-services' => $_POST['convert-services'],
         'subject-type' => $_POST['subject-type'],
         'category' => $_POST['category'],
+        'wp-template' => $_POST['wp-template'],
+        'wp-template-is-enabled' => $_POST['wp-template-is-enabled'],
         'separator-caption-image' => $_POST['separator-caption-image'],
         'copyrightholder-image' => $_POST['copyrightholder-image'],
         'copyrightnotice-image' => $_POST['copyrightnotice-image'],
@@ -90,6 +92,8 @@ function superdesk_admin() {
         'convert-services' => '',
         'subject-type' => '',
         'category' => '',
+        'wp-template' => '',
+        'wp-template-is-enabled' => 'off',
         'separator-caption-image' => '',
         'copyrightholder-image' => '',
         'copyrightnotice-image' => '',
@@ -146,8 +150,8 @@ function superdesk_admin() {
           <table class="form-table">
               <tbody>
                   <tr>
-                      <th>Autoload</th>
-                      <td><?php echo get_site_url(); ?>/wp-content/plugins/superdesk-wordpress-plugin/autoload.php</td>
+                      <th>Autoload (URL for parse pushed data)</th>
+                      <td><?php echo plugins_url('', dirname(__FILE__)); ?>/autoload.php</td>
                   </tr>
                   <tr>
                       <th scope="row">
@@ -352,6 +356,20 @@ function superdesk_admin() {
                                       }
                                       ?>
                           </select>
+                      </td>
+                  </tr>
+                  <tr>
+                      <th scope="row">
+                          <label for="category">SD field for template</label>
+                      </th>
+                      <td>
+                          <input type="text" name="wp-template" id="wp-template" class="regular-text" value="<?php echo($settings['wp-template']); ?>"/>
+                          <br />
+                          <small>SD field with template name in WP (ex. extra.wp-tempalte: Full-Width)</small>
+                          <br /><br />
+                          <label>
+                              <input type="checkbox" name="wp-template-is-enabled" <?php echo ($settings['wp-template-is-enabled']) ? "checked" : ""; ?>> Attach template
+                          </label>
                       </td>
                   </tr>
                   <tr>
