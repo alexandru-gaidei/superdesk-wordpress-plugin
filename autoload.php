@@ -191,9 +191,12 @@ if ($obj['type'] == 'text') {
           'post_content' => $content,
           'post_author' => (int) $author_id,
           'post_content_filtered' => $content,
-          'post_category' => $category,
-          'page_template' => $template
+          'post_category' => $category
       );
+
+      if($settings['wp-template-is-enabled'] == 'on') {
+        $edit_post['page_template'] = $template;
+      }
 
       if (isset($settings['post-formats'], $settings['post-formats-table']) and ! empty($obj['profile']) and $settings['post-formats'] == 'on') {
         if (isset($settings['post-formats-table'][$obj['profile']])) {
@@ -234,9 +237,12 @@ if ($obj['type'] == 'text') {
           'post_content_filtered' => $content,
           'post_author' => (int) $author_id,
           'post_status' => $settings['status'],
-          'post_category' => $category,
-          'page_template' => $template
+          'post_category' => $category
       );
+
+      if($settings['wp-template-is-enabled'] == 'on') {
+        $edit_post['page_template'] = $template;
+      }
 
       $post_ID = wp_insert_post($postarr, true);
 
