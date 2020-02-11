@@ -366,7 +366,12 @@ function superdesk_admin() {
                           <input type="text" name="wp-template" id="wp-template" class="regular-text" value="<?php echo($settings['wp-template']); ?>"/>
                           <br />
                           <small>SD field with template name in WP (ex. extra.wp-tempalte: Full-Width)</small>
-                          <br /><br />
+                          <br />
+                          <small>Available WP tempaltes: <?php 
+                            $templates = wp_get_theme()->get_page_templates();
+                            echo count($templates) > 0 ? implode(', ', $templates)  : 'none'
+                          ?></small>
+                          <br />
                           <label>
                               <input type="checkbox" name="wp-template-is-enabled" <?php echo ($settings['wp-template-is-enabled']) ? "checked" : ""; ?>> Attach template
                           </label>

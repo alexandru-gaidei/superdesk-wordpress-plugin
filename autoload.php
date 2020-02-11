@@ -156,7 +156,31 @@ if ($obj['type'] == 'text') {
       $content = embed_images($content, $image);
     }
 
-    
+    $template = 'default';
+    if ($settings['wp-template-is-enabled'] == 'on' && !empty($settings['wp-template'])) {
+      $pieces = explode('.' , $settings['wp-template']);
+      $template_name = null;
+
+      if( count($pieces) > 0 ) {
+        $template_name = $obj;
+        foreach($pieces as $level) {
+          $level = trim($level);
+          $template_name = isset($template_name[$level]) ? $template_name[$level] : null;
+          if($template_name === null) {
+            break;
+          }
+        }
+      }
+
+      $templates = wp_get_theme()->get_page_templates();
+
+      if(!empty($template_name) && count($templates) > 0) {
+        $template = array_search($template_name, $templates);
+        if(!$template) {
+          $template = 'default';
+        }
+      }
+   }
 
     if ($sync) {
       $post_ID = $sync->post_id;
@@ -167,7 +191,8 @@ if ($obj['type'] == 'text') {
           'post_content' => $content,
           'post_author' => (int) $author_id,
           'post_content_filtered' => $content,
-          'post_category' => $category
+          'post_category' => $category,
+          'page_template' => $template
       );
 
       if (isset($settings['post-formats'], $settings['post-formats-table']) and ! empty($obj['profile']) and $settings['post-formats'] == 'on') {
@@ -210,6 +235,7 @@ if ($obj['type'] == 'text') {
           'post_author' => (int) $author_id,
           'post_status' => $settings['status'],
           'post_category' => $category,
+          'page_template' => $template
       );
 
       $post_ID = wp_insert_post($postarr, true);
