@@ -187,12 +187,15 @@ if ($obj['type'] == 'text') {
       $edit_post = array(
           'ID' => $sync->post_id,
           'post_title' => wp_strip_all_tags($obj['headline']),
-          'post_name' => wp_strip_all_tags($obj['headline']),
           'post_content' => $content,
           'post_author' => (int) $author_id,
           'post_content_filtered' => $content,
           'post_category' => $category
       );
+
+      if($settings['update-wp-slug'] == 'on') {
+        $edit_post['post_name'] = wp_strip_all_tags($obj['headline']);
+      }
 
       if($settings['wp-template-is-enabled'] == 'on') {
         $edit_post['page_template'] = $template;

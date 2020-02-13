@@ -57,6 +57,7 @@ function superdesk_admin() {
         'category' => $_POST['category'],
         'wp-template' => $_POST['wp-template'],
         'wp-template-is-enabled' => $_POST['wp-template-is-enabled'],
+        'update-wp-slug' => $_POST['update-wp-slug'],
         'separator-caption-image' => $_POST['separator-caption-image'],
         'copyrightholder-image' => $_POST['copyrightholder-image'],
         'copyrightnotice-image' => $_POST['copyrightnotice-image'],
@@ -94,6 +95,7 @@ function superdesk_admin() {
         'category' => '',
         'wp-template' => '',
         'wp-template-is-enabled' => 'off',
+        'update-wp-slug' => 'off',
         'separator-caption-image' => '',
         'copyrightholder-image' => '',
         'copyrightnotice-image' => '',
@@ -375,6 +377,30 @@ function superdesk_admin() {
                           <label>
                               <input type="checkbox" name="wp-template-is-enabled" <?php echo ($settings['wp-template-is-enabled']) ? "checked" : ""; ?>> Attach template
                           </label>
+                      </td>
+                  </tr>
+                  <tr>
+                      <th scope="row">
+                          <label for="category">Update WP slug</label>
+                      </th>
+                      <td>
+                          <fieldset>
+                              <label for="off">
+                                  <input type="radio" name="update-wp-slug" id="update-wp-slug-off" value="off"<?php
+                                  if ($settings['update-wp-slug'] == 'off') {
+                                    echo(' checked');
+                                  }
+                                  ?>> off
+                              </label>
+                              <br>
+                              <label for="on">
+                                  <input type="radio" name="update-wp-slug" id="update-wp-slug-on" value="on"<?php
+                                  if ($settings['update-wp-slug'] == 'on') {
+                                    echo(' checked');
+                                  }
+                                  ?>> on
+                              </label>
+                          </fieldset>
                       </td>
                   </tr>
                   <tr>
